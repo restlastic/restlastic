@@ -38,7 +38,7 @@ Now you got
 - Pagination, fulltext search, filters operators, fields filter, subressources, hierarchical json...
 - Automatically managed fields : id, creation_date and modification_date, etag
 - Swagger documentation template with data example in  [swagger editor ](http://editor.swagger.io/#/?import=http://api.restlastic.com/sample/v1/products/swagger.yaml&no-proxy)
-- [Postman]([http://api.restlastic.com/sample/v1/products/postman.json) request template
+- [Postman](http://api.restlastic.com/sample/v1/products/postman.json) request template
 - Access to kibana for dashboarding your data
 - Modular and scalable on premise solution with restlastic, sails.js, elasticsearch, kibana
 
@@ -332,7 +332,7 @@ You can easily create data programmatically.
   var dns="http://localhost:1337/sample/v1/users/";
   var body={};
 
-  // Create 1000 users
+  // Create 10 users
   for (var i = 0; i < 10; i++) {
     body = { id: i, name: 'user_' + i };
     request.put({
