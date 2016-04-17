@@ -1,8 +1,8 @@
 {
   "name": "Restlastic",
   "private": true,
-  "version": "1.0.0",
-  "description": "Restfull APIs with zero coding in less than 30 sec...",
+  "version": "0.9.0",
+  "description": "Your Restfull APIs with zero coding in less than 30 sec...",
   "keywords": [
     "rest",
     "api",
@@ -56,8 +56,11 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/clodio/restlastic.git"
+    "url": "git://github.com/restlastic/restlastic.git"
   },
-  "author": "clodio",
+  "author": {
+    "name": "Claude Seguret",
+    "url": "http://www.restlastic.com"
+  },
   "license": "MIT"
 }
