@@ -117,7 +117,7 @@ if (req.query.secured_api !== undefined ) {
           </div>
           <div class="col-sm-4">
             <h3><i class="fa fa-file-o"></i> <%= __('Easy to Install') %></h3>
-            <p><%= __('Use in the') %> <strong>cloud</strong> <%= __('or simply install') %> <strong>on premise</strong>  <%= __('with') %> <strong>"docker-compose up"</strong> <%= __('or') %> <strong>"npm install restlastic"</strong>.</p>
+            <p><%= __('Use in the') %> <strong>cloud</strong> <%= __('or simply install') %> <strong>on premise</strong>  <%= __('with') %> <strong>"docker-compose up"</strong> <%= __('or') %> <strong>"npm install"</strong>.</p>
           </div>
           <div class="col-sm-4">
             <h3><i class="fa fa-bullhorn"></i> <%= __('Stay Updated') %></h3>
@@ -139,7 +139,6 @@ if (req.query.secured_api !== undefined ) {
           <!--  <p class="small">Create api data/v1/products with fields name, status, price</p>-->
             <p class="code">
               curl -iX <strong>POST</strong> \<br/>
-                &nbsp;&nbsp;&nbsp;&nbsp;-H 'Content-Type: application/json; charset=utf-8' \<br/>
                 <%if (secured_api==true) {%>
                 &nbsp;&nbsp;&nbsp;&nbsp;-H&nbsp;'Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2NsYXVkZS1pZHAubGFwb3N0ZS5mciIsInBybiI6ImNsYXVkZS5zZWd1cmV0QGxhcG9zdGUuZnIiLCJhdWQiOiJodHRwczovL2NsYXVkZS1hdXRoLmxhcG9zdGUuZnIiLCJleHAiOiIxNDYxNTYxNzIxIiwic2NvcGVzIjpbInJlc3NvdXJjZXMucmVhZCIsInJlc3NvdXJjZXMud3JpdGUiXX0.rn6BGkwXv1bqaevBuroqNoBDP6d8dNo3dN1f6kwPqNU'&nbsp;\<br/><%}%>
                 &nbsp;&nbsp;&nbsp;&nbsp;-d '<strong>{ "name":"banana", "status":"available", "price":12 }</strong>' \<br/>
@@ -297,7 +296,9 @@ if (req.query.secured_api !== undefined ) {
             <h3><%= __('with npm') %></h3>
             <p><%= __('You must have') %> <a href="https://www.elastic.co/downloads/elasticsearch" target="_blank" rel="nofollow">elasticsearch</a> <%= __('already installed') %></p>
             <p class="code">
-              $> npm install restlastic<br/>
+              $> git clone https://github.com/restlastic/restlastic.git<br/>
+              $> cd restlastic<br/>
+              $> npm install<br/>
               $> npm start
             </p>
             <p>

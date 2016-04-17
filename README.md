@@ -53,7 +53,7 @@ You can install Restlastic with `docker-compose`, `npm` (if elasticsearch alread
 
 It will install restlastic, elasticsearch and kibana
 ```bash
-$> git clone https://github.com/restlatic/restlatic.git
+$> git clone https://github.com/restlastic/restlastic.git
 $> cd restlastic
 $> docker-compose up -d
 ```
@@ -64,7 +64,9 @@ Then use http://localhost (api), http://localhost:9200 (elasticsearch), http://l
 
 You must have elasticsearch already installed
 ```bash
-$> npm install restlastic
+$> git clone https://github.com/restlastic/restlastic.git
+$> cd restlastic
+$> npm install
 $> npm start
 ```
 
@@ -74,7 +76,7 @@ Then use http://localhost:1337
 
 /!\ All data are deleted each day
 
-Use api.restlatic.com, elastic.restlatic.com, kibana.restlatic.com
+Use api.restlastic.com, elastic.restlastic.com, kibana.restlastic.com
 
 ## Routes
 
