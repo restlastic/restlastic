@@ -28,7 +28,6 @@ Create a `products` API (/sample/v1/products)
 
 ```
 curl -iX POST \
-    -H 'Content-Type: application/json; charset=utf-8' \
     -d '{ "name":"banana", "status":"available", "price":12 }' \
     'http://api.restlastic.com/sample/v1/products'
 ```
@@ -45,7 +44,6 @@ Now you got
 Also when doing requests, its good to know that
 - Your request body JSON should be object enclosed, just like the GET output. (for example `{"name": "Foobar"}`)
 - Id values are not mutable. Any `id` value in the body that differ from id in url will send an error
-- A POST, PUT or PATCH request should include a `Content-Type: application/json` header to use the JSON in the request body. Otherwise it will result in a 200 OK but without changes being made to the data.
 
 ## Install
 

@@ -1,7 +1,7 @@
 {
-  "name": "Restlastic",
-  "version": "0.9.0",
-  "description": "Your Restfull APIs with zero coding in less than 30 sec...",
+  "name": "restlastic",
+  "version": "0.9.1",
+  "description": "Your Restfull APIs with zero coding in less than 30 sec... (see www.restlastic.com)",
   "keywords": [
     "rest",
     "api",
