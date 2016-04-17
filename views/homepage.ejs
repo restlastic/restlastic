@@ -1,0 +1,462 @@
+<%
+var local_api = {};
+local_api.domain=req.query.domain || "sample";
+local_api.version=req.query.version || "v1";
+local_api.ressource=req.query.ressource || "products";
+
+var local_port = "";
+var local_host = "api.restlastic.com";
+var local_protocol = req.protocol +"://";
+var local_url = local_protocol;
+if (req.host.indexOf("restlastic.com") >1 ) {
+  local_url += "api.restlastic.com";
+}
+else {
+  local_url += req.host;
+  local_host = req.host;
+}
+if (req.port) {
+  if (req.port != "80" && req.port != "443") {
+    local_url += ":" + req.port;
+    local_port = ":" + req.port;
+  }
+}
+local_url += "/" + local_api.domain + "/"+ local_api.version + "/"+ local_api.ressource + "/";
+
+// add secured parameter to add authentification on services
+var secured_api= process.env.SECURED_API || false;
+if (req.query.secured_api !== undefined ) {
+  secured_api=true;
+}
+%>
+    <div class="navbar navbar-default navbar-fixed-top navbar-transparent">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="./" class="navbar-brand">Restlastic</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a class="button" href="#live_demo" id="top-bar-demo-button"><%= __('Live Demo') %></a></li>
+            <li><a href="https://github.com/restlastic/restlastic" id="top-bar-documentation" rel="nofollow"><%= __('Docs') %></a></li>
+            <li><iframe id="gh-fork" src="https://ghbtns.com/github-btn.html?user=clodio&repo=restlastic&type=fork" allowtransparency="true" frameborder="0" scrolling="0" width="53" height="20"></iframe></li>
+            <li><iframe id="gh-star" src="https://ghbtns.com/github-btn.html?user=clodio&repo=restlastic&type=watch" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="splash">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-sm-12">
+            <h1>Restlastic</h1>
+            <h2 class="color-swatch brand-info"><%= __('Your Restful APIs with zero coding in less than 30 sec') %>...</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-tout">
+      <h2 class="text-center"><i><%= __('Do not spend time creating APIs, just use them.') %><i></h2>
+    </div>
+
+    <div class="section-video">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <iframe class="" width="100%"  src="https://www.youtube.com/embed/Jsh3Ai7USOw" frameborder="0" allowfullscreen height="300"></iframe>
+          </div>
+            <div class="col-sm-6 big-font">
+            <div>GET /restlastic?price=free</div>
+            <div>{</div>
+            <div class="indent-json"><%= __('features') %> : {</div>
+              <div class="indent-json"><div class="indent-json"><%= __('create : "Restful APIs in less than 30 sec"') %>,</div></div>
+            <div class="indent-json"><div class="indent-json"><%= __('code    : "0 line of code"') %>,</div></div>
+            <div class="indent-json"><div class="indent-json"><%= __('enjoy    : "Pagination, search, filters, fulltext,..."') %>,</div></div>
+            <div class="indent-json"><div class="indent-json"><%= __('generate : "Instantly swagger, postman, mocha"') %>,</div></div>
+            <div class="indent-json"><div class="indent-json"><%= __('dashboard : "Realtime graph with kibana"') %>,</div></div>
+            <div class="indent-json"><div class="indent-json"><%= __('customise : "based on node.js, sails.js, elasticsearch"') %></div></div>
+            <div class="indent-json">},</div>
+            <div class="indent-json">tagline: "You Know, for API"</div>
+            <div>}</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="section-tout">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-sm-4">
+            <h3><i class="fa fa-github"></i> <%= __('Free and Open Source') %></h3>
+            <p><%= __('Restlastic is released under the MIT License and use open source and free components see on') %> <a target="_blank" href="https://github.com/restlastic/restlastic">GitHub</a>.</p>
+          </div>
+          <div class="col-sm-4">
+            <h3><i class="fa fa-wrench"></i> <%= __('Restful Services') %></h3>
+            <p><%= __('Pagination, search, filters, fields filter, subressources, automatic creation and modification dates, etag...') %></p>
+          </div>
+          <div class="col-sm-4">
+            <h3><i class="fa fa-cogs"></i> <%= __('Scalable and Modular') %> </h3>
+             <p><%= __('Easyly configurable and scalabale, it is based on the popular') %> <a href="http://sailsjs.org/" target="_blank" rel="nofollow">sails.js</a>, <a href="https://www.elastic.co/" target="_blank" rel="nofollow">elasticsearch</a> <%= __('and') %> <a href="https://www.elastic.co/products/kibana" target="_blank" rel="nofollow">kibana</a>.</p>
+          </div>
+          <div class="col-sm-4">
+            <h3><i class="fa fa-cloud"></i> <%= __('Analytics included') %></h3>
+            <p><%= __('To better understand your data, easily create bar and line charts, histograms, pie charts with') %> <a href="https://www.elastic.co/products/kibana" target="_blank" rel="nofollow">kibana</a>.</p>
+          </div>
+          <div class="col-sm-4">
+            <h3><i class="fa fa-file-o"></i> <%= __('Easy to Install') %></h3>
+            <p><%= __('Use in the') %> <strong>cloud</strong> <%= __('or simply install') %> <strong>on premise</strong>  <%= __('with') %> <strong>"docker-compose up"</strong> <%= __('or') %> <strong>"npm install restlastic"</strong>.</p>
+          </div>
+          <div class="col-sm-4">
+            <h3><i class="fa fa-bullhorn"></i> <%= __('Stay Updated') %></h3>
+            <p><%= __('Be notified about updates, news by subscribing via') %> <a href="https://twitter.com/restlastic">Twiter</a> or <a href="#newsletter">newsletter</a>.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+<a name="create_api"></a>
+
+    <div class="sections-detail">
+
+
+    <div class="section-detail">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-5">
+          <!--  <p class="small">Create api data/v1/products with fields name, status, price</p>-->
+            <p class="code">
+              curl -iX <strong>POST</strong> \<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;-H 'Content-Type: application/json; charset=utf-8' \<br/>
+                <%if (secured_api==true) {%>
+                &nbsp;&nbsp;&nbsp;&nbsp;-H&nbsp;'Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2NsYXVkZS1pZHAubGFwb3N0ZS5mciIsInBybiI6ImNsYXVkZS5zZWd1cmV0QGxhcG9zdGUuZnIiLCJhdWQiOiJodHRwczovL2NsYXVkZS1hdXRoLmxhcG9zdGUuZnIiLCJleHAiOiIxNDYxNTYxNzIxIiwic2NvcGVzIjpbInJlc3NvdXJjZXMucmVhZCIsInJlc3NvdXJjZXMud3JpdGUiXX0.rn6BGkwXv1bqaevBuroqNoBDP6d8dNo3dN1f6kwPqNU'&nbsp;\<br/><%}%>
+                &nbsp;&nbsp;&nbsp;&nbsp;-d '<strong>{ "name":"banana", "status":"available", "price":12 }</strong>' \<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;'<%= local_protocol %><%= local_host %><% if (local_port) { %><%= local_port %><% } %>/<strong><%= local_api.domain %>/<%= local_api.version %>/<%= local_api.ressource %></strong>'<br/><br/>
+            </p>
+          </div>
+          <div class="col-sm-7">
+            <h2><%= __('Create your API in 10 seconds') %></h2>
+            <p><%= __('To create an API you just have to push data with a POST request') %> <%if (secured_api==true) {%><%= __('with the header authorisation to have grant') %><%}%></p>
+            <p><%= __('Your API must be /:domain/:version/:ressource') %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="section-detail">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-5">
+            <div class="col-sm-6">
+              <img class="img-responsive" src="./images/swagger_editor.png" alt="">
+            </div>
+            <div class="col-sm-6">
+              <img class="img-responsive" src="./images/swagger_ui.png" alt="">
+            </div>
+          </div>
+          <div class="col-sm-7">
+            <h2><%= __('Explore your API with swagger') %></h2>
+            <p><%= __('Your swagger file documentation is avalable at') %> <a href="<%= local_url %>/swagger.yaml" target="_blank"><%= local_url %>/swagger.yaml</a></p>
+            <p><%= __('You can open it in') %> <a href="http://editor.swagger.io/#/?import=<%= local_url %>/swagger.yaml&no-proxy" target="_blank">swagger editor</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="section-detail">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-5">
+              <img class="img-responsive" src="../images/rest-crud.png" alt="">
+          </div>
+          <div class="col-sm-7">
+            <h2><%= __('Get full request features') %></h2>
+            <p><strong><%= __('CRUD Operations') %></strong><br />
+              GET, POST, PUT, PATCH, DELETE
+            </p>
+            <p><strong><%= __('Partial data with fields attribute') %></strong><br />
+              GET sample/v1/products?fields=id,name
+            </p>
+            <p><strong><%= __('Filters') %></strong><br />
+              GET sample/v1/products?name=banana&id=1,2
+            </p>
+            <p><strong><%= __('Pagination') %></strong><br />
+              GET sample/v1/products?start_index=1&count=100
+            </p>
+            <p><strong><%= __('Operators') %></strong> (_ne, _gt, _gte, _lt, _lte, _exist=true, _like, _prefix, _regex, _fuzzy)<br />
+              GET sample/v1/products?price<strong>_ne</strong>=20&creation_date<strong>_lte</strong>=2015-06-18T00:00:00Z
+            </p>
+            <p><strong><%= __('Search') %></strong><br />
+              GET sample/v1/products/search?q=banan
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="section-detail">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-5">
+              <img class="img-responsive" src="images/restplus.png" alt="">
+          </div>
+          <div class="col-sm-7">
+            <h2><%= __('Get convenient features') %></h2>
+            <p><strong><%= __('Automatically managed fields') %></strong> : id, creation_date and modification_date
+            </p>
+            <p><strong><%= __('Sub-ressources') %></strong><br/>
+              GET sample/v1/products/1234567/<strong>_comments</strong><br/>
+              GET sample/v1/products/1234567/<strong>_comments/098765</strong><br/>
+              ...
+            </p>
+            <p><strong><%= __('Ressource versioning') %></strong> <%= __('with Etag') %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="section-detail">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-5">
+            <img class="img-responsive" src="images/postman.png" alt="">
+          </div>
+          <div class="col-sm-7">
+            <h2><%= __('Enjoy Postman tests') %></h2>
+            <p><%= __('Your postman file is avalable at') %> <a href="<%= local_url %>/postman.json" target="_blank"><%= local_url %>/postman.json</a></p>
+            <p><%= __('You can import and use it in') %> <a href="https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop" target="_blank" rel="nofollow">postman UI</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-detail">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-5">
+            <img class="img-responsive" src="images/kibana4-5-color-dot-line-graph.png" alt="">
+          </div>
+          <div class="col-sm-7">
+            <h2><%= __('Explore your data') %></h2>
+            <p><%= __('Use') %> <a href="http://kibana.restlastic.com" target="_blank" rel="nofollow">kibana</a> <%= __('to explore your API data') %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-detail">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-5">
+            <img class="img-responsive" src="images/sailsjs.png" alt="">
+          </div>
+          <div class="col-sm-7">
+            <h2><%= __('Customize') %></h2>
+            <p><%= __('It is  just the beginning.  You will probably want to learn how to customize your API') %> : <%= __('Alter') %> <a href="http://sailsjs.org/#/documentation/concepts/Routes" target="_blank" rel="nofollow"><%= __('routes ') %></a>, <%= __('set up') %> <a href="http://sailsjs.org/#/documentation/concepts/Policies" target="_blank" rel="nofollow"><%= __('security policies') %></a>, <%= __('and build custom') %> <a href="http://sailsjs.org/#/documentation/concepts/Controllers?q=actions" target="_blank" rel="nofollow"><%= __('controller actions') %></a>. <%= __('For more help getting started, check out') %> <a href="http://sailsjs.org" target="_blank" rel="nofollow">sailsjs.org</a>.
+            </p>
+            <p><%= __('Go to the') %> <a href="https://github.com/restlastic/restlastic" rel="nofollow">restlastic</a> <%= __('documentation') %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-detail">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-sm-12"><h2><%= __('Easy to Install') %></h2>
+
+            <div class="col-sm-4">
+            <h3><%= __('with docker') %></h3>
+            <p class="code">
+              $> git clone https://github.com/restlastic/restlastic.git<br/>
+              $> cd restlastic<br/>
+              $> docker-compose up -d
+            </p>
+            <p><%= __('Then use') %> <a href="http://localhost" rel="nofollow">http://localhost</a></p>
+          </div>
+          <div class="col-sm-4">
+            <h3><%= __('with npm') %></h3>
+            <p><%= __('You must have') %> <a href="https://www.elastic.co/downloads/elasticsearch" target="_blank" rel="nofollow">elasticsearch</a> <%= __('already installed') %></p>
+            <p class="code">
+              $> npm install restlastic<br/>
+              $> npm start
+            </p>
+            <p>
+              <%= __('Then use') %> <a href="http://localhost:1337" rel="nofollow">http://localhost:1337</a>
+            </p>
+          </div>
+          <div class="col-sm-4">
+            <h3><%= __('Use the beta online demo') %></h3>
+            <p>/!\ <%= __('All data are deleted each day') %></p>
+            <p><%= __('Use') %> <a href="http://api.restlastic.com">api.restlastic.com</a>, <a href="http://elastic.restlastic.com" rel="nofollow">elastic.restlastic.com</a>, <a href="http://kibana.restlastic.com" rel="nofollow">kibana.restlastic.com</a>
+            </p>
+          </div>
+        </div><!-- end row-->
+      </div>
+    </div>
+
+    <div class="section-detail">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-5">
+            <div class="col-sm-6">
+              <img class="img-responsive" src="./images/swagger_editor.png" alt="">
+            </div>
+            <div class="col-sm-6">
+              <img class="img-responsive" src="./images/swagger_ui.png" alt="">
+            </div>
+          </div>
+          <div class="col-sm-7">
+            <a name="live_demo"></a><h2><%= __('Live Demo') %></h2>
+            <p>
+              <ul>
+                <li><%= __('Import') %> <a href="http://api.restlastic.com/sample/v1/products/postman.json" target="_blank">postman API template</a> <%= __('into') %> <a href="https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm?utm_source=chrome-app-launcher-info-dialog"  target="_blank" rel="nofollow">postman</a></li>
+                <li><%= __('Import') %> <a href="http://api.restlastic.com/sample/v1/products/swagger.yaml" target="_blank">swagger template</a> <%= __('into') %> <a href="http://editor.swagger.io/#/?import=<%= local_url %>/swagger.yaml&no-proxy" target="_blank" rel="nofollow">swagger editor</a></li>
+                <li><%= __('Explore data with') %> <a href="http://kibana.restlastic.com:5601/app/kibana#/dashboard/sample_users__dashboard?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now-6M,mode:quick,to:now))&_a=(filters:!(),options:(darkTheme:!f),panels:!((col:1,id:sample_users__pie_chart_is_vip,panelIndex:1,row:1,size_x:3,size_y:3,type:visualization),(col:4,id:sample_users_histogram_name,panelIndex:2,row:1,size_x:8,size_y:3,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'*')),title:sample_users__dashboard,uiState:())" target="_blank" rel="nofollow">kibana</a></li>
+                <li><%= __('Or') %> <a href="#create_api"><%= __('create your own API') %></a> <%= __('with a post command') %></li>
+                </ul>
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+            <h1><%= __('Go deeper') %></h1>
+            <p class="lead"><span class="brand-danger"><strong><%= __('Please support us') %></strong></span> <%= __('by clicking on one of these links') %>.</p>
+          </div>
+          <div class="col-sm-2">
+            <div class="preview">
+              <div class="image">
+                <a  href="http://www.amazon.fr/gp/product/1449358063/ref=as_li_tl?ie=UTF8&camp=1642&creative=19458&creativeASIN=1449358063&linkCode=as2&tag=seguretorg-21" target="_blank"><img class="img-responsive" src="images/amazon_restful_web_apis<%= __('_lang') %>.png" alt="RESTful Web APIs, by Leonard Richardson"></a>
+              </div>
+              <div class="options">
+                <h3>RESTful Web <br/>APIs</h3>
+                <p>Leonard Richardson</p>
+                <div>
+                  <div class="btn-group"><a class="btn btn-info" href="http://www.amazon.fr/gp/product/1449358063/ref=as_li_tl?ie=UTF8&camp=1642&creative=19458&creativeASIN=1449358063&linkCode=as2&tag=seguretorg-21" target="_blank">Amazon</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="preview">
+              <div class="image">
+                <a href="http://www.amazon.fr/gp/product/1449308929/ref=as_li_tl?ie=UTF8&camp=1642&creative=19458&creativeASIN=1449308929&linkCode=as2&tag=seguretorg-21" target="_blank"><img class="img-responsive" src="images/amazon_api_a_startegy_guide<%= __('_lang') %>.png" alt="APIs, a strategy guide, by Daniel Jacobs"></a>
+              </div>
+              <div class="options">
+                <h3>APIs, a strategy guide</h3>
+                <p>Daniel Jacobs</p>
+                <div>
+                  <div class="btn-group"><a class="btn btn-info"  href="http://www.amazon.fr/gp/product/1449308929/ref=as_li_tl?ie=UTF8&camp=1642&creative=19458&creativeASIN=1449308929&linkCode=as2&tag=seguretorg-21" target="_blank">Amazon</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="preview">
+              <div class="image">
+                <a  href="http://www.amazon.fr/gp/product/B0046RERXY/ref=as_li_tl?ie=UTF8&camp=1642&creative=19458&creativeASIN=B0046RERXY&linkCode=as2&tag=seguretorg-21" target="_blank"><img class="img-responsive" src="images/amazon_rest_in_practice<%= __('_lang') %>.png" alt="REST in practice: Hypermedia and Systems Architecture"></a>
+              </div>
+              <div class="options">
+                <h3>REST in <br/>practice</h3>
+                <p>Jim Weber</p>
+                <div>
+                  <div class="btn-group"><a class="btn btn-info" href="http://www.amazon.fr/gp/product/B0046RERXY/ref=as_li_tl?ie=UTF8&camp=1642&creative=19458&creativeASIN=B0046RERXY&linkCode=as2&tag=seguretorg-21" target="_blank">Amazon</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="preview">
+              <div class="image">
+                <a  href="http://www.amazon.fr/gp/product/1783287314/ref=as_li_tl?ie=UTF8&camp=1642&creative=19458&creativeASIN=1783287314&linkCode=as2&tag=seguretorg-21" target="_blank"><img class="img-responsive" src="images/amazon_nodejs_design_pattern<%= __('_lang') %>.png" alt="Node.js Design Patterns, by Mario Casciaro"></a>
+              </div>
+              <div class="options">
+                <h3>Node.js Design Patterns</h3>
+                <p>Mario Casciaro</p>
+                <div>
+                  <div class="btn-group"><a class="btn btn-info" href="http://www.amazon.fr/gp/product/1783287314/ref=as_li_tl?ie=UTF8&camp=1642&creative=19458&creativeASIN=1783287314&linkCode=as2&tag=seguretorg-21" target="_blank">Amazon</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="preview">
+              <div class="image">
+                <a  href="http://www.amazon.fr/gp/product/1491950358/ref=as_li_tl?ie=UTF8&camp=1642&creative=19458&creativeASIN=1491950358&linkCode=as2&tag=seguretorg-21" target="_blank"><img class="img-responsive" src="images/amazon_building_microservices<%= __('_lang') %>.png" alt="Building Microservices"></a>
+              </div>
+              <div class="options">
+                <h3>Building Microservices</h3>
+                <p>Sam Newman</p>
+                <div>
+                  <div class="btn-group"><a class="btn btn-info" href="http://www.amazon.fr/gp/product/1491950358/ref=as_li_tl?ie=UTF8&camp=1642&creative=19458&creativeASIN=1491950358&linkCode=as2&tag=seguretorg-21" target="_blank">Amazon</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="preview">
+              <div class="image">
+                <a rel="nofollow" href="http://www.amazon.fr/gp/product/B00SLXVBC4/ref=as_li_tl?ie=UTF8&camp=1642&creative=19458&creativeASIN=B00SLXVBC4&linkCode=as2&tag=seguretorg-21"><img class="img-responsive" src="images/amazon_elasticsearch<%= __('_lang') %>.png" alt="Elasticsearch, The definitive guide" /></a>
+              </div>
+              <div class="options">
+                <h3>Elasticsearch: The Definitive Guide</h3>
+                <p>Clinton Gormley</p>
+                <div>
+                  <div class="btn-group">
+                    <a class="btn btn-info" rel="nofollow" href="http://www.amazon.fr/gp/product/B00SLXVBC4/ref=as_li_tl?ie=UTF8&camp=1642&creative=19458&creativeASIN=B00SLXVBC4&linkCode=as2&tag=seguretorg-21">Amazon</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+      <div class="row">
+        <a name="newsletter"></a><h3 class="text-center"><%= __('Get notified of new releases') %></h3>
+      </div>
+      <div class="row">
+
+        <!-- Begin MailChimp Signup Form -->
+        <div id="mc_embed_signup">
+        <form action="//seguret.us13.list-manage.com/subscribe/post?u=65715d175c7fa8e992290510f&amp;id=9329575d5d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll">
+        	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="<%= __('your email address') %>" required>
+            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_65715d175c7fa8e992290510f_9329575d5d" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="<%= __('Subscribe') %>" name="subscribe" id="mc-embedded-subscribe" class="button btn btn-info "></div>
+            </div>
+        </form>
+      </div><!--End mc_embed_signup-->
+    </div>
+  </div>
+  <div class="row copyright text-center">© 2016 Claude Seguret &amp; Restlastic</div>
+  <!-- <%= process.env.ELASTICSEARCH_HOST %>-->
+</div>
