@@ -1,6 +1,5 @@
 {
   "name": "Restlastic",
-  "private": true,
   "version": "0.9.0",
   "description": "Your Restfull APIs with zero coding in less than 30 sec...",
   "keywords": [
