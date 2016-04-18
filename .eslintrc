@@ -1,0 +1,25 @@
+---
+extends:
+  airbnb
+rules:
+  brace-style:
+    - error
+    - stroustrup
+  max-len:
+    - error
+    - 200
+    - 4
+  no-else-return:
+    - off
+  prefer-template:
+    - off
+  no-undef:
+    - warn
+  consistent-return:
+    - warn
+  prefer-arrow-callback:
+    - warn
+  no-param-reassign:
+    - warn
+  no-var:
+    - warn

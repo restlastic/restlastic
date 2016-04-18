@@ -1,4 +1,3 @@
-'use strict'
 var elasticsearch = require('elasticsearch');
 var uuid = require('uuid');
 var shortid = require('shortid');

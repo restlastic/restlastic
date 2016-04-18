@@ -32,20 +32,19 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-	'/*' : 'SessionController.disable',
-
+  '/*': 'SessionController.disable',
   '/': {
     view: 'homepage',
     locals: {
-			api: {
-      	domain: 'data' ,
-      	version: 'v1',
-      	ressource: 'products'
-    	}
-		}
+      api: {
+        domain: 'data',
+        version: 'v1',
+        ressource: 'products',
+      },
+    },
   },
 
-	/***************************************************************************
+  /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
   *                                                                          *
@@ -54,37 +53,37 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
-  //'GET /users/v1/user/:id': 'RessourceController.alter',
+  // 'GET /users/v1/user/:id': 'RessourceController.alter',
 
-	/* add assets routes to avoid authentification */
-	'GET /js/:file': 'AssetsController.assets',
-	'GET /images/:file': 'AssetsController.assets',
-	'GET /styles/:file': 'AssetsController.assets',
-	'GET /templates/:file': 'AssetsController.assets',
-	'GET /favicon.ico': 'AssetsController.assets',
-	'GET /robots.txt': 'AssetsController.assets',
-	'GET /sitemap.xml': 'AssetsController.assets',
+ /* add assets routes to avoid authentification */
+  'GET /js/:file': 'AssetsController.assets',
+  'GET /images/:file': 'AssetsController.assets',
+  'GET /styles/:file': 'AssetsController.assets',
+  'GET /templates/:file': 'AssetsController.assets',
+  'GET /favicon.ico': 'AssetsController.assets',
+  'GET /robots.txt': 'AssetsController.assets',
+  'GET /sitemap.xml': 'AssetsController.assets',
 
-	'GET /:domain/:version/swagger/:id': 'RessourceController.swagger_template',
+  'GET /:domain/:version/swagger/:id': 'RessourceController.swaggerTemplate',
 
-	'GET /:domain/:version/:model/:id/_:secondModel/search?*': 'RessourceController.searchSecondModel',
-	'GET /:domain/:version/:model/:id/_:secondModel/:secondId': 'RessourceController.findOneSecondModel',
+  'GET /:domain/:version/:model/:id/_:secondModel/search?*': 'RessourceController.searchSecondModel',
+  'GET /:domain/:version/:model/:id/_:secondModel/:secondId': 'RessourceController.findOneSecondModel',
   'GET /:domain/:version/:model/:id/_:secondModel': 'RessourceController.findAllSecondModel',
-	'PUT /:domain/:version/:model/:id/_:secondModel/:secondId': 'RessourceController.alterOrCreateSecondModel',
-	'POST /:domain/:version/:model/:id/_:secondModel': 'RessourceController.createSecondModel',
+  'PUT /:domain/:version/:model/:id/_:secondModel/:secondId': 'RessourceController.alterOrCreateSecondModel',
+  'POST /:domain/:version/:model/:id/_:secondModel': 'RessourceController.createSecondModel',
   'POST /:domain/:version/:model/:id/_:secondModel/:secondId': 'RessourceController.alterSecondModel',
-	'PATCH /:domain/:version/:model/:id/_:secondModel/:secondId': 'RessourceController.alterSecondModel',
-	'DELETE /:domain/:version/:model/:id/_:secondModel/:secondId': 'RessourceController.deleteSecondModel',
+  'PATCH /:domain/:version/:model/:id/_:secondModel/:secondId': 'RessourceController.alterSecondModel',
+  'DELETE /:domain/:version/:model/:id/_:secondModel/:secondId': 'RessourceController.deleteSecondModel',
 
-	'GET /:domain/:version/:model/search?*': 'RessourceController.search',
-	'GET /:domain/:version/:model/swagger.yaml?*': 'RessourceController.swagger',
-	'GET /:domain/:version/:model/postman.json?*': 'RessourceController.postman',
-	'GET /:domain/:version/:model/:id': 'RessourceController.findOne',
+  'GET /:domain/:version/:model/search?*': 'RessourceController.search',
+  'GET /:domain/:version/:model/swagger.yaml?*': 'RessourceController.swagger',
+  'GET /:domain/:version/:model/postman.json?*': 'RessourceController.postman',
+  'GET /:domain/:version/:model/:id': 'RessourceController.findOne',
   'GET /:domain/:version/:model?*': 'RessourceController.findAll',
   'PUT /:domain/:version/:model/:id': 'RessourceController.alterOrCreate',
   'POST /:domain/:version/:model': 'RessourceController.create',
   'POST /:domain/:version/:model/:id': 'RessourceController.alter',
-	'PATCH /:domain/:version/:model/:id': 'RessourceController.alter',
+  'PATCH /:domain/:version/:model/:id': 'RessourceController.alter',
   'DELETE /:domain/:version/:model/:id': 'RessourceController.deleteOne',
 
 };
