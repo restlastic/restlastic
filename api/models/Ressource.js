@@ -1,3 +1,4 @@
+'use strict'
 var elasticsearch = require('elasticsearch');
 var uuid = require('uuid');
 var shortid = require('shortid');
@@ -32,7 +33,7 @@ module.exports = {
     if (query.fields) {
         // Add Fields filter with _source to DSL Query   : http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-source-filtering.html
         var queryFieldsTmp = query.fields.split(",");
-        for(i in queryFieldsTmp) {
+        for(var i in queryFieldsTmp) {
             DSLQueryFields.push(queryFieldsTmp[i]);
         }
 				DSLQuery["_source"] = DSLQueryFields;
@@ -705,7 +706,7 @@ module.exports = {
 		req.body.id = req.params.id;
 
 		//if there is no modification_date add it
-    currentDate = new Date().toISOString().replace(/\..+/, '') + "Z";
+    var currentDate = new Date().toISOString().replace(/\..+/, '') + "Z";
     if (!req.body.modification_date) {
     	req.body.modification_date = currentDate;
     }
@@ -787,7 +788,7 @@ module.exports = {
 
 
 		//if there is no creation_date or modification_date add them
-    currentDate = new Date().toISOString().replace(/\..+/, '') + "Z";
+    var currentDate = new Date().toISOString().replace(/\..+/, '') + "Z";
 
 		if (!body.creation_date) {
     	body.creation_date = currentDate;
@@ -873,7 +874,7 @@ module.exports = {
 
 
 		//if there is no creation_date or modification_date add them
-    currentDate = new Date().toISOString().replace(/\..+/, '') + "Z";
+    var currentDate = new Date().toISOString().replace(/\..+/, '') + "Z";
 
 		if (!body.creation_date) {
     	body.creation_date = currentDate;
