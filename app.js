@@ -1,3 +1,4 @@
+const newrelic = require('newrelic');
 /**
  * app.js
  *
